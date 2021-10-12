@@ -1,0 +1,14 @@
+E01: /start cmd con coordinate sbagliate (nulle o diverse da due caratteri)
+E02: /start cmd senza coordinate richiede scansione
+E03: coordinate iniziali non sui bordi
+E04: raggiunta posizione sbagliata
+E05: conversazione continua dopo la fine
+E06: richesta senza stato di avanzamento
+E07: richesta senza stato di avanzamento
+
+S01: messaggio posizione iniziale
+S0n: messaggio posizione intermedia
+S0e: messaggio posizione finale
+
+		$response['data']['cmd']="";
+		$response['data']['dbg']='E01';

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodyMaze Dashboard</title>
+<script type='text/javascript' src='js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link href="css/site.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div id="main">
+<h1 class="intest">CodyMaze Dashboard</h1>
+<hr id="hd1">
+<div id="param">
+<label for="chat_id">Chat ID:</label><input type="text" id="chat_id" name="chat_id" value="">
+<input type="button" id="id_req" name="id_req" value="ID Request" onClick="sendIDReq()">
+<label for="cell">Position:</label><input type="text" id="cell" name="cell" value="">
+<input type="button" id="send_pos" name="send_pos" value="Send Position" onClick="sendPos()">
+<label for="dir">Direction:</label><input type="text" id="dir" name="dir" value="">
+<label for="dir">Info:</label><input type="text" id="info" name="info" value="">
+<input type="button" id="send_dir" name="send_dir" value="Send Direction" onClick="sendDir()">
+<label for="dir">Name:</label><input type="text" id="name" name="name" value="">
+<input type="button" id="send_name" name="send_name" value="Send Name" onClick="sendName()">
+<input type="button" id="send_certs" name="send_cert" value="Send My Certificates" onClick="sendCert()">
+<input type="button" id="send_res" name="send_res" value="Send Reset" onClick="sendRes()">
+</div>
+<hr id="hd1">
+<h5 ><i>REQUEST:</i><span id="rq">?</span></h5>
+<h5><i>RESPONSE:</i><span id="rs">?</span></h5>
+</div>
+<div id="debug"></div>
+</body>
+</html>
+<script type="text/javascript">
+var chat_id=0;
+var info='f';
+function sendIDReq() {
+	//build request URL
+	var req="apiregister.php";
+	//local diagnostic of request URL
+	jQuery('#rq').html(req);
+	//send request and wait for response (sycronous)
+	jQuery.ajax({
+		url: req,
+		dataType: 'html',
+		success: function (data) {
+					//remote diagnostic of response
+					jQuery('#rs').html(data);
+					var status=jQuery.parseJSON( data ).status;
+					chat_id=jQuery.parseJSON( data ).data.telegram_id;
+					if(status=='ok') {
+						jQuery('#chat_id').val(chat_id);
+					}	
+					else {
+						jQuery("#debug").html("register error");
+					}
+				},
+        error: function(){
+					//error trap
+                    jQuery("#debug").html("AJAX error");
+                },
+		});
+}
+function sendPos() {
+	//build request URL
+	var req="apimessage.php?chat_id="+jQuery('#chat_id').val()+"&lang=it&text=/start "+jQuery('#cell').val();
+	//local diagnostic of request URL
+	jQuery('#rq').html(req);
+	//send request and wait for response (sycronous)
+	jQuery.ajax({
+		url: req,
+		dataType: 'html',
+		success: function (data) {
+					//remote diagnostic of response
+					jQuery('#rs').html(data);
+					var status=jQuery.parseJSON( data ).status;
+					chat_id=jQuery.parseJSON( data ).data.chat_id;
+					state=jQuery.parseJSON( data ).data.state;
+					if(status=='ok') {
+						jQuery('#chat_id').val(chat_id);
+						jQuery('#info').val(state);
+					}	
+					else {
+						jQuery("#debug").html("pos message error");
+					}
+				},
+        error: function(){
+					//error trap
+                    jQuery("#debug").html("AJAX error");
+                },
+		});
+}
+function sendDir() {
+	//build request URL
+	var req="apicallback.php?chat_id="+jQuery('#chat_id').val()+"&lang=it&data=card "+jQuery('#dir').val()+" "+jQuery('#info').val();
+	//local diagnostic of request URL
+	jQuery('#rq').html(req);
+	//send request and wait for response (sycronous)
+	jQuery.ajax({
+		url: req,
+		dataType: 'html',
+		success: function (data) {
+					//remote diagnostic of response
+					jQuery('#rs').html(data);
+					//var status=jQuery.parseJSON( data ).status;
+					//var chat_id=jQuery.parseJSON( data ).data.telegram_id;
+					//if(status=='ok') {
+					//	jQuery('#chat_id').val(chat_id);
+					//}	
+					//else {
+					//	jQuery("#debug").html("register error");
+					//}
+				},
+        error: function(){
+					//error trap
+                    jQuery("#debug").html("AJAX error");
+                },
+		});
+}
+function sendRes() {
+	//build request URL
+	var req="apimessage.php?chat_id="+jQuery('#chat_id').val()+"&lang=it&text=/reset ";
+	//local diagnostic of request URL
+	jQuery('#rq').html(req);
+	//send request and wait for response (sycronous)
+	jQuery.ajax({
+		url: req,
+		dataType: 'html',
+		success: function (data) {
+					//remote diagnostic of response
+					jQuery('#rs').html(data);
+				},
+        error: function(){
+					//error trap
+                    jQuery("#debug").html("AJAX error");
+                },
+		});
+}
+function sendCert() {
+	//build request URL
+	var req="apimessage.php?chat_id="+jQuery('#chat_id').val()+"&lang=it&text=/send_my_certificates";
+	//local diagnostic of request URL
+	jQuery('#rq').html(req);
+	//send request and wait for response (sycronous)
+	jQuery.ajax({
+		url: req,
+		dataType: 'html',
+		success: function (data) {
+					//remote diagnostic of response
+					jQuery('#rs').html(data);
+				},
+        error: function(){
+					//error trap
+                    jQuery("#debug").html("AJAX error");
+                },
+		});
+}
+
+function sendName() {
+	//build request URL
+	var req="apicallback.php?chat_id="+jQuery('#chat_id').val()+"&lang=it&data=name "+jQuery('#name').val();	
+	//local diagnostic of request URL
+	jQuery('#rq').html(req);
+	//send request and wait for response (sycronous)
+	jQuery.ajax({
+		url: req,
+		dataType: 'html',
+		success: function (data) {
+					//remote diagnostic of response
+					jQuery('#rs').html(data);
+				},
+        error: function(){
+					//error trap
+                    jQuery("#debug").html("AJAX error");
+                },
+		});
+}
+
+</script>

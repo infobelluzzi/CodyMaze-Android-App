@@ -1,0 +1,64 @@
+#container {
+    width: 1338px;
+    height: 910px;
+    text-align: center;
+    /*border: 10px solid #cf6cad;*/
+    background-image: url("../images/codymaze.png");
+    background-size: 1338px 910px;
+}
+
+#container .wrapper {
+    padding: 370px 120px 0 120px;
+}
+
+#container .wrapper div {
+    margin: 0.6em 0;
+}
+
+.small-spaced {
+    display: block;
+    padding-top: 5px;
+}
+
+.title {
+    font-size: 22px;
+    font-style: italic;
+}
+
+.font-10 {
+    font-size: 10px;
+    font-style: italic;
+}
+
+.font-15 {
+    font-size: 15px;
+    font-style: italic;
+}
+
+.font-20 {
+    font-size: 22px;
+}
+
+.name {
+    font-size: 34px;
+    font-weight: bold;
+    color: black;
+    margin: 2em 0;
+}
+
+.details {
+
+}
+
+.unbreakable {
+    white-space: nowrap;
+}
+
+#signature {
+    padding-left: 670px;
+    text-align: left;
+}
+
+@media print {
+
+}
