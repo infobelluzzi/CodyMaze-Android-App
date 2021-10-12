@@ -1,0 +1,1 @@
+QRCode for infobelluzzi CodyMazed
