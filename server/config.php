@@ -19,10 +19,10 @@ define('TELEGRAM_FILE_API_URI_BASE', 'https://api.telegram.org/file/bot' . TELEG
 //define('DATABASE_USERNAME', getenv('DATABASE_USERNAME'));
 //define('DATABASE_PASSWORD', getenv('DATABASE_PASSWORD'));
 //define('DATABASE_SOCKET', getenv('DATABASE_SOCKET'));
-define('DATABASE_HOST', '62.149.150.178');
-define('DATABASE_NAME', 'Sql936232_5');
-define('DATABASE_USERNAME', 'Sql936232');
-define('DATABASE_PASSWORD', 'g2cq6ha002');
+define('DATABASE_HOST', 'database_host');
+define('DATABASE_NAME', 'database_name');
+define('DATABASE_USERNAME', 'database_username');
+define('DATABASE_PASSWORD', 'database_password');
 //end iDP 2021
 
 // PHP configuration
